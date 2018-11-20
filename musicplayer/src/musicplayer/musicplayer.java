@@ -1,6 +1,7 @@
 package musicplayer;
 
 import java.awt.EventQueue;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import javafx.stage.Screen;
 import java.awt.Color;
+import java.awt.Font;
 
 
 public class musicplayer extends JFrame {
@@ -30,6 +32,7 @@ public class musicplayer extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,16 +51,25 @@ public class musicplayer extends JFrame {
 	 */
 	
 	public musicplayer() {
+		
+		ImageIcon mainback=new ImageIcon(musicplayer.class.getResource("../picture/mainback.PNG"));
+		contentPane = new JPanel() {
+	         public void paintComponent(Graphics g) {
+	             g.drawImage(mainback.getImage(), 0, 0,1280,700, null);
+	             setOpaque(false); //그림을 표시하게 설정,투명하게 조절
+	             super.paintComponent(g);
+	         }
+	    };
+	    
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1920, 1080);
-		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		contentPane.setBackground(Color.GRAY);
-		setTitle("뮤직 플레이어");
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		setTitle("깔라만시 플레이어");
 		setContentPane(contentPane);
 		
-		JButton findicon = new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/find.PNG"));
+		JButton findicon = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/find.PNG")));
 		findicon.setToolTipText("\uAC80\uC0C9");
 		findicon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -67,7 +79,7 @@ public class musicplayer extends JFrame {
 			}
 		});
 		
-		JButton logout = new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/logout.PNG"));
+		JButton logout = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/logout.PNG")));
 		logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				login framelog = new login();
@@ -76,65 +88,59 @@ public class musicplayer extends JFrame {
 			}
 		});
 		logout.setToolTipText("\uB85C\uADF8\uC544\uC6C3");
-		logout.setBounds(994, 10, 64, 57);
+		logout.setBounds(771, 0, 42, 41);
+		logout.setBorderPainted(false);
+		logout.setFocusPainted(false);
 		contentPane.add(logout);
 		
-		findicon.setBounds(1005, 138, 48, 41);
+		findicon.setBounds(516, 111, 48, 41);
 		contentPane.add(findicon);
 		
-		JSlider slider = new JSlider();
-		slider.setBackground(Color.GRAY);
-		slider.setBounds(42, 20, 149, 19);
-		contentPane.add(slider);
+		JButton sound = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/sound.PNG")));
+		sound.setBounds(1110, 497, 53, 47);
+		contentPane.add(sound);
 		
-		JLabel maxsound = new JLabel(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/maxsound.PNG"));
-		maxsound.setBounds(203, 10, 37, 41);
-		contentPane.add(maxsound);
-
-		JLabel minsound = new JLabel(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/minsound.PNG"));
-		minsound.setBounds(0, 10, 37, 34);
-		contentPane.add(minsound);
-		
-		JButton fastf = new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/fastf.PNG"));
-		fastf.setBounds(129, 62, 46, 41);
+		JButton fastf = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/fastf.PNG")));
+		fastf.setBounds(1131, 590, 64, 75);
 		contentPane.add(fastf);
 		
-		JButton fastb = new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/fastb.PNG"));
-		fastb.setBounds(44, 62, 46, 41);
+		JButton fastb = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/fastb.PNG")));
+		fastb.setBounds(895, 590, 64, 75);
 		contentPane.add(fastb);
 		
-		JButton play = new JButton(new ImageIcon("C:/Users/\uC815\uD604\uC815/eclipse-workspace/musicplayer/src/picture/play.PNG"));
+		JButton play = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/play.PNG")));
 		play.setToolTipText("\uC7AC\uC0DD");
-		play.setBounds(252, 38, 70, 65);
-		play.setBorderPainted(false);
+		play.setBounds(981, 565, 127, 125);
+		//play.setBorderPainted(false);
 		play.setFocusPainted(false);
 		play.setContentAreaFilled(false);
 		contentPane.add(play);
 		
-		JButton shuffle = new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/shuffle.PNG"));
-		shuffle.setBounds(1200, 148, 53, 47);
+		JButton shuffle = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/shuffle.PNG")));
+		shuffle.setBounds(1024, 497, 53, 47);
 		contentPane.add(shuffle);
 		
-		JButton allplay = new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/allplay.PNG"));
-		allplay.setBounds(1141, 148, 53, 47);
+		JButton allplay = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/allplay.PNG")));
+		allplay.setBounds(936, 497, 53, 47);
 		contentPane.add(allplay);
 		
-		JButton list= new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/list.PNG"));
-		list.setBounds(1082, 148, 53, 47);
+		JButton list= new JButton(new ImageIcon(musicplayer.class.getResource("../picture/list.PNG")));
+		list.setBounds(598, 111, 53, 47);
 		contentPane.add(list);
 		
-		JButton users = new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/users.PNG"));
+		JButton users = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/users.PNG")));
 		users.setToolTipText("Users");
-		users.setBounds(24, 351, 140, 80);
+		users.setBounds(466, 54, 79, 30);
 		contentPane.add(users);
 		
-		JButton favoritemusic = new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/favoritemusic.PNG"));
+		JButton favoritemusic = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/favoritemusic.PNG")));
 		favoritemusic.setToolTipText("Favorite Music");
-		favoritemusic.setBounds(24, 249, 140, 80);
+		favoritemusic.setBounds(229, 54, 178, 30);
 		contentPane.add(favoritemusic);
 		
-		JButton Musicchart = new JButton(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/musicchart.PNG"));
+		JButton Musicchart = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/musicchart.PNG")));
 		Musicchart.setToolTipText("music chart");
+		Musicchart.setOpaque(true);
 		Musicchart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Musicchart 맨앞으로 오게하기
@@ -142,31 +148,15 @@ public class musicplayer extends JFrame {
 				//JOptionPane.showMessageDialog(null, "music chart");
 			}
 		});
-		Musicchart.setBounds(24, 148, 140, 80);
+		Musicchart.setBounds(33, 54, 143, 30);
 		contentPane.add(Musicchart);
 		
-		JLabel up_hpanel = new JLabel(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/재생bar.PNG"));
-		up_hpanel.setBounds(0, 0, 1064, 125);
-		contentPane.add(up_hpanel);
-		
-		JLabel left_vpanel = new JLabel(new ImageIcon("C:/Users/\uC815\uD604\uC815/eclipse-workspace/musicplayer/src/picture/\uC138\uB85C2.PNG"));
-		left_vpanel.setBounds(0, 113, 194, 368);
-		contentPane.add(left_vpanel);
-		
-		JLabel cover= new JLabel(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/coverex.PNG"));
-		cover.setBounds(0, 483, 192, 207);
+		JLabel cover= new JLabel(new ImageIcon(musicplayer.class.getResource("../picture/coverex.PNG")));
+		cover.setBounds(871, 93, 363, 356);
 		contentPane.add(cover);
 		
-		JLabel logo = new JLabel(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/한기대.PNG"));
-		logo.setBounds(1064, 0, 207, 125);
-		contentPane.add(logo);
-		
-		JLabel playlist = new JLabel(new ImageIcon("C:/Users/정현정/eclipse-workspace/musicplayer/src/picture/세로2.PNG"));
-		playlist.setBounds(1065, 108, 206, 592);
-		contentPane.add(playlist);
-		
 		JTabbedPane screen = new JTabbedPane(JTabbedPane.TOP);
-		screen.setBounds(203, 195, 851, 495);
+		screen.setBounds(24, 172, 540, 495);
 		contentPane.add(screen);
 		
 		charttable = new JTable();
@@ -179,9 +169,21 @@ public class musicplayer extends JFrame {
 		screen.addTab("User", null,  usertab, null);
 		
 		find = new JTextField();
-		find.setBounds(206, 138, 801, 41);
+		find.setBounds(24, 111, 474, 41);
 		contentPane.add(find);
 		find.setColumns(10);
+		
+		JLabel songname = new JLabel("SOLO");
+		songname.setForeground(Color.BLACK);
+		songname.setFont(new Font("돋움", Font.BOLD, 30));
+		songname.setBounds(1013, 23, 103, 35);
+		contentPane.add(songname);
+		
+		JLabel singer = new JLabel("제니");
+		singer.setForeground(Color.BLACK);
+		singer.setFont(new Font("돋움", Font.BOLD, 20));
+		singer.setBounds(1035, 57, 48, 27);
+		contentPane.add(singer);
 		
 	}
 }
