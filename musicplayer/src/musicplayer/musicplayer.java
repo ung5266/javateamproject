@@ -50,19 +50,19 @@ public class musicplayer extends JFrame {
 	 * Create the frame.
 	 */
 	
-	public musicplayer() {
-		
-		ImageIcon mainback=new ImageIcon(musicplayer.class.getResource("../picture/mainback.PNG"));
+	public musicplayer() {//music player생성자
+		//패널에 사진 넣기
+		ImageIcon mainback=new ImageIcon(musicplayer.class.getResource("../picture/mainback.PNG")); 
 		contentPane = new JPanel() {
 	         public void paintComponent(Graphics g) {
-	             g.drawImage(mainback.getImage(), 0, 0,1280,700, null);
-	             setOpaque(false); //그림을 표시하게 설정,투명하게 조절
+	             g.drawImage(mainback.getImage(), 0, 0,1280,700, null);//mainback 이미지를 받아서 표시
+	             setOpaque(false); //그림을 표시하게 설정,투명도 조절
 	             super.paintComponent(g);
 	         }
 	    };
 	    
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1920, 1080);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //프레임의 종료버튼이 눌렀을때 프로그램도 종료
+		setBounds(0, 0, 1920, 1080);//프레임의 위치와 크기 조절
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -140,6 +140,8 @@ public class musicplayer extends JFrame {
 		
 		JButton Musicchart = new JButton(new ImageIcon(musicplayer.class.getResource("../picture/musicchart.PNG")));
 		Musicchart.setToolTipText("music chart");
+		//Musicchart.setBorderPainted(false);
+		//Musicchart.setFocusPainted(false);
 		Musicchart.setOpaque(true);
 		Musicchart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

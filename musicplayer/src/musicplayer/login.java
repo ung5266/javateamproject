@@ -8,12 +8,18 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -60,6 +66,7 @@ public class login extends JFrame {
 		//contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
+		setTitle("로그인");
 		setContentPane(contentPane);
 		
 		idtext = new JTextField();
@@ -68,7 +75,7 @@ public class login extends JFrame {
 		contentPane.add(idtext);
 		idtext.setColumns(10);
 		
-		pintext = new JTextField();
+		pintext = new JPasswordField();
 		pintext.setBounds(53, 288, 284, 59);
 		contentPane.add(pintext);
 		pintext.setColumns(10);
@@ -92,47 +99,53 @@ public class login extends JFrame {
 				else {//둘 다 입력이 되어있을 때
 					
 					//해당 아이디 가입여부 확인
-					try {
-						FileReader fileID=new FileReader("C:\\Users\\정현정\\eclipse-workspace\\musicplayer\\src\\TextFile\\ID.txt");
-						BufferedReader bufReaderID=new BufferedReader(fileID);
-			            while ((input = bufReaderID.readLine()) != null)
-			            {
-			                if (input.equals(idtext.getText()))
-			                { count++; break; }
-			                index++;
-			            }
-			            bufReaderID.close();
-					}catch(FileNotFoundException a){
-					}catch(IOException a){
-					}
-					
-					//해당 비밀번호 가입 여부
-					try {
-						FileReader filePW=new FileReader("C:\\Users\\정현정\\eclipse-workspace\\musicplayer\\src\\TextFile\\PW.txt");
-						BufferedReader bufReaderPW=new BufferedReader(filePW);
-			            while ((input = bufReaderPW.readLine()) != null)
-			            {
-			                if (input.equals(pintext.getText()))
-			                { count++; break; }
-			                index--;
-			            }
-			            bufReaderPW.close();
-					}catch(FileNotFoundException a){
-					}catch(IOException a){
-					}
-				
-					if((count==2) && (index==0)) {
-						musicplayer frame = new musicplayer();
-						frame.setVisible(true);
-						idtext.setText("");
-						pintext.setText("");
-						dispose();
-					}
-					else {
-						JOptionPane.showMessageDialog(null,"아이디 혹은 비밀번호가 틀렸습니다","알림",JOptionPane.ERROR_MESSAGE);
-						idtext.setText("");
-						pintext.setText("");
-					}
+					try{
+		                  String fileID = "jdbc:ucanaccess://C:\\Users\\정현정\\eclipse-workspace\\musicplayer\\src\\database\\signdata.mdb";
+		                  Connection conn = DriverManager.getConnection(fileID);
+		                      Statement st = conn.createStatement();
+		                      ResultSet rs = st.executeQuery("SELECT ID from 테이블1");
+
+		                         while(rs.next()){
+		                            String ID= rs.getString("ID");                       
+		                          if((idtext.getText()).equals(ID)) {
+		                               count++; break; //아이디 중복될 때 
+		                            }
+		                          index++;
+		                         }
+		                         rs.close();//데이터베이스 연결 끊기
+		                        conn.close();
+		               }catch (SQLException e1) {System.out.println(e1);}
+
+		               
+		               try{
+		                  String fileID = "jdbc:ucanaccess://C:\\Users\\정현정\\eclipse-workspace\\musicplayer\\src\\database\\signdata.mdb";
+		                  Connection conn = DriverManager.getConnection(fileID);
+		                      Statement st = conn.createStatement();
+		                      ResultSet rs = st.executeQuery("SELECT Password from 테이블1");
+
+		                         while(rs.next()){
+		                            String Password= rs.getString("Password");                       
+		                          if((pintext.getText()).equals(Password)) {
+		                               count++; break; //아이디 중복될 때 
+		                            }
+		                          index--;                        
+		                          }
+		                         rs.close();//데이터베이스 연결 끊기
+		                        conn.close();
+		               }catch (SQLException e1) {System.out.println(e1);}
+		               
+		                if((count==2) && (index==0)) {
+		                        musicplayer frame = new musicplayer();
+		                        frame.setVisible(true);
+		                        idtext.setText("");
+		                        pintext.setText("");
+		                        dispose();
+		                     }
+		                     else {
+		                        JOptionPane.showMessageDialog(null,"아이디 혹은 비밀번호가 틀렸습니다","알림",JOptionPane.ERROR_MESSAGE);
+		                        idtext.setText("");
+		                        pintext.setText("");
+		                     }
 				}
 
 			}
